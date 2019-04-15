@@ -33,6 +33,10 @@ export const Planets = styled.div`
     li {
       font-weight: bold;
       padding: 12px 20px;
+      text-align: center;
+      &:last-child {
+        margin-bottom: 20px;
+      }
     }
   }
   div {

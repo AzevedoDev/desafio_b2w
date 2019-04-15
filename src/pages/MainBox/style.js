@@ -21,10 +21,10 @@ export const Container = styled.div`
     background: linear-gradient(180deg, #10202f 0%, #1d1621 100%);
     box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.25);
     border-radius: 23px;
-    justify-content: space-between;
+    justify-content: space-around;
 
     span {
-      font-size: 34px;
+      font-size: 30px;
       width: 100%;
       margin-top: 36px;
       text-transform: uppercase;
@@ -52,8 +52,12 @@ export const Container = styled.div`
       cursor: pointer;
       background: #c12242;
       border-radius: 50px;
-      margin-bottom: 56px;
+      /* margin-bottom: 20px; */
       text-transform: uppercase;
+
+      &:last-child {
+        margin-bottom: 30px;
+      }
 
       &:hover {
         background-color: #af374f;
