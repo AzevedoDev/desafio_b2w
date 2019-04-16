@@ -98,12 +98,12 @@ export default class MainBox extends Component {
       <Container noInputerror={noInput}>
         <form onSubmit={this.handlePlanetSubmit}>
           <span>Search your Favorite Planet</span>
-          {!err === false ? <p>Tivemos um problema na consulta</p> : ''}
+          {!err === false ? <p>We have a problem!</p> : ''}
           <input
             type="text"
             value={planetInput}
             onChange={e => this.setState({ planetInput: e.target.value })}
-            placeholder={noInput === true ? 'We need a name of planet' : 'Planet Name'}
+            placeholder={noInput === true ? 'This Planet don\'t exist' : 'Planet Name'}
           />
           <button type="submit">Search Planet</button>
           <button onClick={this.handleRandomButton} type="button">
