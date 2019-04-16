@@ -18,7 +18,6 @@ body{
   font-family: 'Roboto Condensed', sans-serif;
   background: #5C1E29;
   color: #fff;
-  background-image: url(../assets/star.svg);
   
 }
 `;
