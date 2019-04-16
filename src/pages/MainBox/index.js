@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import smoothScroll from 'smoothscroll-polyfill';
 import { Container } from './style';
 import api from '../../services/api';
 import PlanetCard from '../../components/PlanetCard';
@@ -21,7 +22,6 @@ export default class MainBox extends Component {
     };
 
     const randomP = randomPlanet(1, 61);
-    console.log(randomP);
     try {
       const res = await api.get(`planets/${randomP}`);
       const result = await Promise.all(res.data.films.map(f => api.get(f)));
@@ -39,6 +39,7 @@ export default class MainBox extends Component {
           },
         ],
       });
+      window.scroll({ top: 2500, left: 0, behavior: 'smooth' });
     } catch (err) {
       console.log(err);
     }
@@ -66,6 +67,7 @@ export default class MainBox extends Component {
             },
           ],
         });
+        window.scroll({ top: 2500, left: 0, behavior: 'smooth' });
       }
     } catch (err) {
       console.log(err);
@@ -88,7 +90,7 @@ export default class MainBox extends Component {
             Random Planet
           </button>
         </form>
-        <div>
+        <div onChange={this.handleSmothingScroll}>
           <PlanetCard planets={this.state.planets} />
         </div>
       </Container>
