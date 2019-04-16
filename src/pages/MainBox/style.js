@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 80px;
+  padding-top: 40px;
 
   div {
     display: flex;
@@ -42,7 +42,7 @@ export const Container = styled.div`
       background-color: #fff;
 
       border-bottom: ${props => (props.noInputerror === true ? '5px solid #fff' : '1px solid #c12242')};
-      background: linear-gradient(180deg, #10202f 0%, #1d1621 100%);
+      background: transparent;
     }
     button {
       width: 175px;

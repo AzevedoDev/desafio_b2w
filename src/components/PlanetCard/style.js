@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-content: space-between;
-  margin: 50px;
+  margin: 50px auto;
 `;
 
 export const Planets = styled.div`
