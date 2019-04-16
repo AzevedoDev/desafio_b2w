@@ -5,23 +5,25 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 80px;
+  padding-top: 80px;
 
   div {
     display: flex;
   }
   form {
     display: flex;
+    flex-shrink: 1;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     align-content: center;
-    width: 600px;
+    width: 90%;
     height: 400px;
     background: linear-gradient(180deg, #10202f 0%, #1d1621 100%);
     box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.25);
     border-radius: 23px;
     justify-content: space-around;
+    max-width: 600px;
 
     span {
       font-size: 30px;
@@ -33,7 +35,7 @@ export const Container = styled.div`
 
     input {
       color: #fff;
-      width: 400px;
+      width: 80%;
       height: 40px;
       font-size: 20px;
       text-align: center;
