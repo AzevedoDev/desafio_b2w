@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Container, Planets } from './style';
 
 const Planet = ({ planets }) => (
@@ -45,4 +46,15 @@ const Planet = ({ planets }) => (
     ))}
   </Container>
 );
+Planet.propTypes = {
+  planets: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      population: PropTypes.string,
+      climate: PropTypes.string,
+      terrain: PropTypes.string,
+    }),
+  ).isRequired,
+};
 export default Planet;

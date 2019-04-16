@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import smoothScroll from 'smoothscroll-polyfill';
 import { Container } from './style';
 import api from '../../services/api';
 import PlanetCard from '../../components/PlanetCard';
@@ -7,7 +6,9 @@ import PlanetCard from '../../components/PlanetCard';
 export default class MainBox extends Component {
   state = {
     planetInput: '',
+    noInput: false,
     planets: [],
+    err: false,
   };
 
   handleRandomButton = async () => {
@@ -15,6 +16,7 @@ export default class MainBox extends Component {
       const minimo = Math.ceil(min);
       const maximo = Math.floor(max);
       const randomNumber = Math.floor(Math.random() * (maximo - minimo + 1)) + minimo;
+      // eslint-disable-next-line
       if (randomNumber === randomNumber) {
         return randomNumber + 1;
       }
@@ -38,19 +40,24 @@ export default class MainBox extends Component {
             films: result.map(r => r.data.title),
           },
         ],
+        noInput: false,
+        err: false,
       });
       window.scroll({ top: 2500, left: 0, behavior: 'smooth' });
     } catch (err) {
-      console.log(err);
+      this.setState({
+        err: true,
+      });
     }
   };
 
   handlePlanetSubmit = async (e) => {
     e.preventDefault();
+    const { planetInput } = this.state;
 
     try {
-      if (this.state.planetInput !== undefined && this.state.planetInput !== '') {
-        const res = await api.get(`planets/?search=${this.state.planetInput}`);
+      if (planetInput !== undefined && planetInput !== '') {
+        const res = await api.get(`planets/?search=${planetInput}`);
 
         const result = await Promise.all(res.data.results[0].films.map(f => api.get(f)));
 
@@ -66,24 +73,37 @@ export default class MainBox extends Component {
               films: result.map(r => r.data.title),
             },
           ],
+          noInput: false,
+          err: false,
         });
         window.scroll({ top: 2500, left: 0, behavior: 'smooth' });
+      } else {
+        this.setState({
+          noInput: true,
+        });
       }
     } catch (err) {
-      console.log(err);
+      this.setState({
+        noInput: true,
+        err: true,
+      });
     }
   };
 
   render() {
+    const {
+      planetInput, planets, err, noInput,
+    } = this.state;
     return (
-      <Container>
+      <Container noInputerror={noInput}>
         <form onSubmit={this.handlePlanetSubmit}>
           <span>Search your Favorite Planet</span>
+          {!err === false ? <p>Tivemos um problema na consulta</p> : ''}
           <input
             type="text"
-            value={this.state.planetInput}
+            value={planetInput}
             onChange={e => this.setState({ planetInput: e.target.value })}
-            placeholder="Planet Name"
+            placeholder={noInput === true ? 'We need a name of planet' : 'Planet Name'}
           />
           <button type="submit">Search Planet</button>
           <button onClick={this.handleRandomButton} type="button">
@@ -91,7 +111,7 @@ export default class MainBox extends Component {
           </button>
         </form>
         <div onChange={this.handleSmothingScroll}>
-          <PlanetCard planets={this.state.planets} />
+          <PlanetCard planets={planets} />
         </div>
       </Container>
     );
